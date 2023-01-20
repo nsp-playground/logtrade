@@ -1,4 +1,4 @@
-name: 'Auto Bump Version + Create Tag'
+name: 'Changelog'
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
       - develop
 
 jobs:
-  bump-version-create-tag:
+  changelog:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
