@@ -30,6 +30,8 @@ jobs:
           minor-wording: '[MINOR]'
           major-wording: '[MAJOR]'
           patch-wording: '[PATCH]'
+					target-branch: 'develop'
+					commit-message: 'CI: auto version bump to {{version}}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Output Step'
