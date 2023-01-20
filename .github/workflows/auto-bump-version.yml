@@ -13,7 +13,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
 
-			- name: Setup git
+      - name: Setup git
         run: |
           git config user.name 'Nazmuz Pranto'
           git config user.email 'npranto4@gmail.com'
