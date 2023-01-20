@@ -1,4 +1,4 @@
-name: 'Changelog'
+name: 'Auto Bump Version + Create Tag'
 
 on:
   pull_request:
@@ -7,10 +7,10 @@ on:
       - develop
 
 jobs:
-	bump-version-create-tag:
-		runs-on: ubuntu-latest
-		steps:
-			- name: Checkout source code
-				uses: actions/checkout@v3
-			- name: Conventional Changelog Action
-				uses: TriPSs/conventional-changelog-action@v3
+  bump-version-create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Conventional Changelog Action
+        uses: TriPSs/conventional-changelog-action@v3
