@@ -22,7 +22,7 @@ jobs:
         run: npm version minor
 
       - name: 'Bump version | Patch'
-        if: !contains(github.event.pull_request.title, '[MINOR]') && !contains(github.event.pull_request.title, '[MAJOR]')
+        if: contains(github.event.pull_request.title, '[MINOR]') == false && contains(github.event.pull_request.title, '[MAJOR]') == false
         run: npm version patch
 
       - name: Setup git
