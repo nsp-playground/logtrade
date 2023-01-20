@@ -13,6 +13,11 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
 
+			- name: Setup git
+        run: |
+          git config user.name 'Nazmuz Pranto'
+          git config user.email 'npranto4@gmail.com'
+
       - name: 'Bump version | Major'
         if: contains(github.event.pull_request.title, '[MAJOR]')
         run: npm version major
@@ -24,11 +29,6 @@ jobs:
       - name: 'Bump version | Patch'
         if: contains(github.event.pull_request.title, '[MINOR]') == false && contains(github.event.pull_request.title, '[MAJOR]') == false
         run: npm version patch
-
-      - name: Setup git
-        run: |
-          git config user.name 'Nazmuz Pranto'
-          git config user.email 'npranto4@gmail.com'
 
       - name: Push latest version
         run: git push origin develop --follow-tags
