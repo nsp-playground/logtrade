@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Bump version type? (major / minor / patch)'
+        description: 'Select version increment'
         required: true
         type: choice
         options:
