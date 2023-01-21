@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+        with:
+          ref: ${{ env.BRANCH_NAME }}
 
       - name: Check if branch exists
         run: |
@@ -22,9 +24,9 @@ jobs:
         uses: nwtgck/actions-netlify@v1.2
         with:
           publish-dir: 'build'
-          production-branch: $BRANCH_NAME
+          production-branch: ${{ env.BRANCH_NAME }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 10
+        timeout-minutes: 2
