@@ -13,13 +13,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ env.BRANCH_NAME }}
-
-      - name: Check if branch exists
-        run: |
-          if ! git ls-remote --heads origin $BRANCH_NAME; then
-            echo "Branch $BRANCH_NAME does not exist. Skipping deployment."
-            exit 78
-          fi
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
