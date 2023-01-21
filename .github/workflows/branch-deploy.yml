@@ -2,35 +2,29 @@ name: 'Custom Branch Deploy'
 
 on:
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch name to deploy'
-        required: true
-  push:
-    branches:
-      - deploy/*
 
 jobs:
   custom:
     runs-on: ubuntu-latest
+    env:
+      BRANCH_NAME: ${{ github.event.client_payload.branch }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
 
       - name: Check if branch exists
         run: |
-          BRANCH=${{ inputs.branch }}
-          if ! git ls-remote --heads origin $BRANCH; then
-            echo "Branch $BRANCH does not exist. Skipping deployment."
+          if ! git ls-remote --heads origin $BRANCH_NAME; then
+            echo "Branch $BRANCH_NAME does not exist. Skipping deployment."
             exit 78
           fi
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
           publish-dir: 'build'
-          production-branch: ${{ inputs.branch }}
+          production-branch: $BRANCH_NAME
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 1
+        timeout-minutes: 10
