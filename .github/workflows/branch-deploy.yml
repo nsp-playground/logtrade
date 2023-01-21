@@ -7,12 +7,16 @@ jobs:
   custom:
     runs-on: ubuntu-latest
     env:
-      BRANCH_NAME: ${{ github.event.client_payload.branch }}
+      BRANCH_NAME: ${{ env.GITHUB_REF#refs/heads/ }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
         with:
           ref: ${{ env.BRANCH_NAME }}
+
+      - name: 'Active branch name'
+        run: echo "Branch name: ${{ env.BRANCH_NAME }}"
+
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
